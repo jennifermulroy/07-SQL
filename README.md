@@ -2,11 +2,15 @@
 
 ## Data Analysis
 
+![ERD](Images/ERD.png)
+
 #### How can you isolate (or group) the transactions of each cardholder?
 
 SELECT card_number, COUNT(card_number) as "transactions per card_number"
 FROM transactions
 GROUP BY card_number; 
+
+![trxns](Images/trxnspercard.png)
 
 #### Consider the time period 7:00 a.m. to 9:00 a.m. What are the top 100 highest transactions during this time period? Do you see any fraudulent or anomalous transactions? If you answered yes to the previous question, explain why you think there might be fraudulent transactions during this time frame.
 
@@ -17,14 +21,16 @@ WHERE CAST(date_time as time) >= '07:00:00'
 ORDER BY amount DESC
 LIMIT 100;
 
-SELECT date_time, amount as " average transaction from 7-9am"
-FROM transactions
-WHERE CAST(date_time as time) >= '07:00:00' 
-   and CAST(date_time as time) <= '09:00:00'
-ORDER by amount DESC
-LIMIT 100;
+![morning](Images/seven_nine.png)
 
 The average transaction size is $45.19, but the first 8 largest transactions during 7-9am average $1,226.25. These transactions appear to significant outliers in the data and therefore, are potentally fraudulent transactions. 
+
+SELECT AVG(Amount) as "average transaction from 7-9am"
+FROM transactions
+WHERE CAST(date_time as time) >= '07:00:00' 
+   and CAST(date_time as time) <= '09:00:00';
+   
+![average](Images/seven_nine_avg.png)
 
 #### Some fraudsters hack a credit card by making several small payments (generally less than $2.00), which are typically ignored by cardholders. Count the transactions that are less than $2.00 per cardholder. Is there any evidence to suggest that a credit card has been hacked? Explain your rationale.
 
