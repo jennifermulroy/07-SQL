@@ -10,11 +10,11 @@ GROUP BY card_number;
 
 #### Consider the time period 7:00 a.m. to 9:00 a.m. What are the top 100 highest transactions during this time period? Do you see any fraudulent or anomalous transactions? If you answered yes to the previous question, explain why you think there might be fraudulent transactions during this time frame.
 
-SELECT date_time, Amount as "largest transactions from 7-9am"
+SELECT date_time, amount as "largest transactions from 7-9am"
 FROM transactions
 WHERE CAST(date_time as time) >= '07:00:00' 
    and CAST(date_time as time) <= '09:00:00'
-ORDER by amount DESC
+ORDER BY amount DESC
 LIMIT 100;
 
 SELECT date_time, amount as " average transaction from 7-9am"
