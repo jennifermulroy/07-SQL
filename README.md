@@ -23,7 +23,7 @@ LIMIT 100;
 
 ![morning](Images/seven_nine.png)
 
-The average transaction size is $45.19, but the first 8 largest transactions during 7-9am average $1,226.25. These transactions appear to significant outliers in the data and therefore, are potentally fraudulent transactions. 
+The average transaction size is $45.19, but the first 8 largest transactions during 7-9am average $1,226.25. These 8 large transactions appear to significant outliers in the data and therefore, are potentally fraudulent transactions. 
 
 SELECT AVG(Amount) as "average transaction from 7-9am"
 FROM transactions
@@ -42,15 +42,21 @@ FROM transactions
 WHERE amount < 2.00
 GROUP BY card_number; 
 
+![two](Images/less_than_2.png)
+
 I searched for the average number of transactions per card and it was 6.6
 
 SELECT ROUND(AVG("transactions per card_number less than $2"),2) as "average number of transactions less than $2"
 FROM two_dollar;
 
+![avg_two](Images/average_less_than_2.png)
+
 I searched for the maximum number of transactions for a given credit card and arrived at 13, that is approximately double the average and should be flagged and further investigated for fraudulent activity.  
 
 SELECT MAX("transactions per card_number less than $2") as "largest number of transactions per card"
 FROM two_dollar;
+
+![max_two](Images/max_less_than_2.png)
 
 I then searched for the corresponding card number that matched the 13 transactions.  
 
@@ -58,7 +64,11 @@ SELECT card_number, ("transactions per card_number less than $2") as "largest nu
 FROM two_dollar
 WHERE "transactions per card_number less than $2" =13;
 
+![credit_card_2](Images/max_credit_card_less_than_2.png)
+
 --What are the top 5 merchants prone to being hacked using small transactions?
+
+I searched for the number of transactions under $2.00 by merchant name and compiled the top 5 merchants with the largest number of small transactions. 
 
 CREATE VIEW join_trx_merchant as
 SELECT transactions.merchant_id, merchant.merchant_category_id, merchant.merchant_name, transactions.amount
@@ -71,3 +81,5 @@ WHERE amount <2.00
 GROUP BY merchant_name
 ORDER BY "number of transactions under $2" DESC
 LIMIT 5;
+
+![top5merchants](Images/top5merchants.png)
