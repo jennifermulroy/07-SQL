@@ -83,3 +83,5 @@ ORDER BY "number of transactions under $2" DESC
 LIMIT 5;
 
 ![top5merchants](Images/top5merchants.png)
+
+What difference do you observe between the consumption patterns? Does the difference suggest a fraudulent transaction? Explain your rationale.
