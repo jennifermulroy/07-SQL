@@ -1,5 +1,7 @@
 # 07-SQL
 
+##### Unit 7 Homework Assignment: Looking for Suspicious Transactions 
+
 ## Data Analysis
 
 ![ERD](Images/ERD.png)
@@ -66,7 +68,7 @@ WHERE "transactions per card_number less than $2" =13;
 
 ![credit_card_2](Images/max_credit_card_less_than_2.png)
 
---What are the top 5 merchants prone to being hacked using small transactions?
+#### What are the top 5 merchants prone to being hacked using small transactions?
 
 I searched for the number of transactions under $2.00 by merchant name and compiled the top 5 merchants with the largest number of small transactions. 
 
@@ -84,4 +86,15 @@ LIMIT 5;
 
 ![top5merchants](Images/top5merchants.png)
 
-What difference do you observe between the consumption patterns? Does the difference suggest a fraudulent transaction? Explain your rationale.
+#### Verify if there are any fraudulent transactions in the history of two of the most important customers of the firm. For privacy reasons, you only know that their cardholders' IDs are 18 and 2. What difference do you observe between the consumption patterns? Does the difference suggest a fraudulent transaction? Explain your rationale.
+
+In analyzing a year of transaction data for cardholders' IDs 18 and 2, there is a significant difference in their comsumption patterns. Cardholder 2 consistently spends within a range of $2-20 dollars. Cardholder ID 18 also spends in a similar range but has a monthly one time spend of $1,000+ which could indicate potential fraud. 
+
+![2](Images/card_holder_2.png)
+![18](Images/card_holder_18.png)
+
+#### The CEO of the biggest customer of the firm suspects that someone has used her corporate credit card without authorization in the first quarter of 2018 to pay quite expensive restaurant bills. You are asked to find any anomalous transactions during that period. Do you notice any anomalies? Describe your observations and conclusions.
+
+The box plot indicates outliers in the transaction data each month for the first half of 2018. These data points are signficantly above the range and average consumption spend. These tranasactions are inconsistent with the consumption trends and should be further investigated. 
+
+![25](Images/card_holder_25.png)
